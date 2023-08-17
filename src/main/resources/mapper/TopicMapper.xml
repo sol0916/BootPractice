@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sample.practice.service.TopicMapper">
+
+	<!-- 글 등록하기 -->
+	<insert id="topicRegist" parameterType="TopicVO">
+		insert into topic(topic_regdate,
+						  topic_id,
+						  topic_title,
+						  topic_content
+						  )
+		values(#{topic_regdate},
+			   #{topic_id},
+			   #{topic_title},
+			   #{topic_content}	
+			   )
+	</insert>
+	
+	
+	<!-- 전체리스트 불러오기 -->
+	<select id="getList" resultType="TopicVO">
+		select * from topic where topic_id = #{topic_id}
+	</select>
+	
+	<!-- 상세보기 -->
+	<select id="getDetail" resultType="TopicVO">
+		select * from topic where topic_num = #{topic_num}
+	</select>
+	
+	<!-- 내가 쓴 글 불러오기 -->
+	<select id="myList" resultType="TopicVO">
+		select * from topic where topic_id = #{topic_id}
+	</select>
+	
+	<!-- 수정하기 -->
+	<update id="topicModify" parameterType="TopicVO">
+		update topic
+		set topic_regdate = #{topic_regdate}, 
+			topic_title = #{topic_title},
+			topic_content = #{topic_content}
+		where topic_num = #{topic_num} and topic_id = #{topic_id}	
+	</update>
+	
+	
+	<!-- 삭제하기 -->
+	<delete id="topicDelete" parameterType="TopicVO">
+		delete from topic where topic_num = #{topic_num}
+	</delete>
+
+
+
+</mapper>
